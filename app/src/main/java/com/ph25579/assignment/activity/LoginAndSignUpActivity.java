@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.ph25579.assignment.R;
 
 public class LoginAndSignUpActivity extends AppCompatActivity {
-    private Button btnLogin,btnSignup;
+    private Button btnLogin, btnSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,23 +19,25 @@ public class LoginAndSignUpActivity extends AppCompatActivity {
         initViews();
         initData();
     }
-    private void initViews(){
+
+    private void initViews() {
         btnLogin = findViewById(R.id.btn_login);
         btnSignup = findViewById(R.id.btn_signup);
     }
-    private void initData(){
+
+    private void initData() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-               startActivity(new Intent(LoginAndSignUpActivity.this,RegisterUserActivity.class));
+                startActivity(new Intent(LoginAndSignUpActivity.this, LoginUserActivity.class));
             }
         });
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-                startActivity(new Intent(LoginAndSignUpActivity.this,RegisterUserActivity.class));
+                startActivity(new Intent(LoginAndSignUpActivity.this, RegisterUserActivity.class));
             }
         });
     }
