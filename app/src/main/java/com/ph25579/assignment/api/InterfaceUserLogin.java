@@ -1,5 +1,7 @@
 package com.ph25579.assignment.api;
 
+import com.ph25579.assignment.model.User;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

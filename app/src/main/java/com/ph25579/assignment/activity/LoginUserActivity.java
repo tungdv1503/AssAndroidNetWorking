@@ -11,6 +11,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,11 +24,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 import com.ph25579.assignment.MainActivity;
 import com.ph25579.assignment.R;
 import com.ph25579.assignment.api.ApiResponse;
 import com.ph25579.assignment.api.InterfaceUserLogin;
 import com.ph25579.assignment.api.RetrofitClientUser;
+import com.ph25579.assignment.model.User;
 import com.ph25579.assignment.model.UserLogin;
 
 import retrofit2.Call;
@@ -101,8 +104,14 @@ public class LoginUserActivity extends AppCompatActivity {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getSuccess() == 1) {
                         dialog.dismiss();
-                        // Đăng nhập thành công, thực hiện hành động sau khi đăng nhập thành công
-                        startActivity(new Intent(LoginUserActivity.this, MainActivity.class));
+                        User user1 = apiResponse.getUser();
+                        if (user1.getRoute() == 1) {
+                            Intent intent = new Intent(LoginUserActivity.this, MainActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("userId",user1.getId());
+                            intent.putExtra("bundleUser",bundle);
+                            startActivity(intent);
+                        }
                         Toast.makeText(LoginUserActivity.this, apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         dialog.dismiss();
@@ -121,6 +130,7 @@ public class LoginUserActivity extends AppCompatActivity {
                 // Xử lý khi gọi API bị lỗi
                 dialog.dismiss();
                 Toast.makeText(LoginUserActivity.this, "Lỗi kết nối đến máy chủ!" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("eee", t.getMessage());
             }
         });
     }

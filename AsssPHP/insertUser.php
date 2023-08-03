@@ -26,3 +26,4 @@ if(isset($_GET['Id'])&&isset($_GET['Username'])&&isset($_GET['Password'])&&isset
         }
 
 }
+?>

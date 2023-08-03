@@ -11,7 +11,8 @@ public interface InterfaceInsertUser {
     Call<ApiResponse> insertUser (
             @Field("Username") String username,
             @Field("Password") String password,
-            @Field("Email") String email
+            @Field("Email") String email,
+            @Field("route") int route
     );
     @FormUrlEncoded
     @POST("checkUsernameExists.php")

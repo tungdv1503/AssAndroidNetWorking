@@ -90,7 +90,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 } else if (password.length() < 6) {
                     Toast.makeText(RegisterUserActivity.this, "Password phải tối thiểu là 6 kí tự", Toast.LENGTH_SHORT).show();
                 } else {
-                    User user = new User(username, password, email);
+                    User user = new User(username, password, email,0);
                     checkUser(user);
                 }
             }
@@ -107,7 +107,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     private void registerUser(User user) {
         dialog.show();
         InterfaceInsertUser apiService = RetrofitClientUser.getRetrofitInstance().create(InterfaceInsertUser.class);
-        Call<ApiResponse> call = apiService.insertUser(user.getUsername(), user.getPassword(), user.getEmail());
+        Call<ApiResponse> call = apiService.insertUser(user.getUsername(), user.getPassword(), user.getEmail(),user.getRoute());
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
