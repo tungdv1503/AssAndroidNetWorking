@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -105,14 +106,24 @@ public class LoginUserActivity extends AppCompatActivity {
                     if (apiResponse != null && apiResponse.getSuccess() == 1) {
                         dialog.dismiss();
                         User user1 = apiResponse.getUser();
-                        if (user1.getRoute() == 1) {
-                            Intent intent = new Intent(LoginUserActivity.this, MainActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putInt("userId",user1.getId());
-                            intent.putExtra("bundleUser",bundle);
-                            startActivity(intent);
-                        }
+//                        if (user1.getRoute() == 1) {
+                        SharedPreferences sharedPreferences = getSharedPreferences("UsersAccount", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        Intent intent = new Intent(LoginUserActivity.this, MainActivity.class);
+//                        Bundle bundle = new Bundle();
+                        editor.putInt("userId", user1.getId());
+                        editor.putString("userName", user1.getUsername());
+                        editor.putString("userPassword", user1.getPassword());
+                        editor.putInt("userRoute", user1.getRoute());
+                        editor.apply();
+//                        bundle.putInt("userId", user1.getId());
+//                        bundle.putString("userName", user1.getUsername());
+//                        bundle.putInt("userRoute", user1.getRoute());
+//                        bundle.putString("userPassword", user1.getPassword());
+//                        intent.putExtra("bundleUser", bundle);
+                        startActivity(intent);
                         Toast.makeText(LoginUserActivity.this, apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
                     } else {
                         dialog.dismiss();
                         // Đăng nhập thất bại, hiển thị thông báo lỗi tương ứng

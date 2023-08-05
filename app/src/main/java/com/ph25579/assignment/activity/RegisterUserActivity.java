@@ -85,7 +85,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                     Toast.makeText(RegisterUserActivity.this, "Không được bỏ trống các dòng thông tin", Toast.LENGTH_SHORT).show();
                 } else if (EmailValidator.isValidEmail(email) == false) {
                     Toast.makeText(RegisterUserActivity.this, "email không hợp lệ", Toast.LENGTH_SHORT).show();
-                } else if (password.equals(comfirmpassword)) {
+                } else if (!password.equals(comfirmpassword)) {
                     Toast.makeText(RegisterUserActivity.this, "Password phải trùng với confirmpassword", Toast.LENGTH_SHORT).show();
                 } else if (password.length() < 6) {
                     Toast.makeText(RegisterUserActivity.this, "Password phải tối thiểu là 6 kí tự", Toast.LENGTH_SHORT).show();

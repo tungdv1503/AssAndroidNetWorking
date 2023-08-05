@@ -19,4 +19,10 @@ public interface InterfaceInsertUser {
     Call<ApiResponse> checkUsernameExists(
             @Field("Username") String username
     );
+    @FormUrlEncoded
+    @POST("updatePasswordUsers.php")
+    Call<ApiResponse> updatePassword (
+            @Field("Id") String Id,
+            @Field("Password") String Password
+    );
 }
